@@ -14,26 +14,23 @@ const RollADiceHandler = {
   handle(handlerInput) {
     var diceResults = [];
     var rolls;
-    var diceSum;
+    var diceSum = 0;
+
+    rolls = handlerInput.requestEnvelope.request.intent.slots.numberOfDice.value;
     
-    
-    try {
-      rolls = handlerInput.requestEnvelope.request.intent.slots.numberOfDice.value;
+    if (rolls === undefined){
+      rolls = 1;
     }
-    catch(error) {
-      //If there is no rolls value set it to 1
-      if (rolls === null){
-        rolls = 1;
-      }
-    }
-    console.log(rolls + " bleep");
+
+    console.log("Number of rolls: " + rolls);
     
-    for(let i = 0; i <= rolls; i++){
+    for(let i = 0; i < rolls; i++){
         diceResults[i] = dice();
-        console.log(diceResults[i]);
+        console.log("Roll " + i + ": " + diceResults[i]);
 
         //Add the rolls together
-        diceSum += diceResults[i];
+        diceSum += parseInt(diceResults[i], 10);
+        console.log("diceSum: " + diceSum);
     }
     
     var cardTitle;
@@ -47,13 +44,15 @@ const RollADiceHandler = {
     else {
       cardTitle = "You rolled " + rolls + " dice";
       speechText = "You rolled a " + diceResults[0];
-      for (let i = 1; i <= diceResults.length - 1; i++){
+      for (let i = 1; i < diceResults.length - 1; i++){
         speechText += ", a " + diceResults[i];
       }
       speechText += ", and a " + diceResults[diceResults.length - 1];
-      speechText += ".  Your total is " + diceSum;
-      console.log(speechText);
+      speechText += ".  Your total is " + parseInt(diceSum, 10);
+      //console.log(diceSum);
     }
+    
+    console.log("Output: " + speechText);
 
     return handlerInput.responseBuilder
       .speak(speechText)
