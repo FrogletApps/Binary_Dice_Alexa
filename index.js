@@ -22,40 +22,51 @@ const RollADiceHandler = {
       rolls = 1;
     }
 
-    console.log("Number of rolls: " + rolls);
+    //console.log("Number of rolls: " + rolls);
     
     for(let i = 0; i < rolls; i++){
         diceResults[i] = dice();
-        console.log("Roll " + i + ": " + diceResults[i]);
+        //console.log("Roll " + i + ": " + diceResults[i]);
 
         //Add the rolls together
         diceSum += parseInt(diceResults[i], 10);
-        console.log("diceSum: " + diceSum);
+        //console.log("diceSum: " + diceSum);
     }
     
+    var intro = "Let's roll!  ";
+    var introRoll;
     var cardTitle;
     var outputWritten;
-    var speechText;
+    var outputSpeech;
+    
+    if (dice() == 0){
+      introRoll = "<audio src='https://s3-eu-west-1.amazonaws.com/frogletappsalexa/binaryDice/coin1.mp3' />";
+    }else{
+      introRoll = "<audio src='https://s3-eu-west-1.amazonaws.com/frogletappsalexa/binaryDice/coin2.mp3' />";
+    }
     
     if (rolls == 1){
       cardTitle = "You rolled 1 die";
-      speechText = "You rolled a " + diceResults[0];
+      outputWritten = "You rolled a " + diceResults[0];
+      outputSpeech = intro + introRoll + outputWritten;
     }
     else {
       cardTitle = "You rolled " + rolls + " dice";
-      speechText = "You rolled a " + diceResults[0];
+      outputWritten = "You rolled a " + diceResults[0];
       for (let i = 1; i < diceResults.length - 1; i++){
-        speechText += ", a " + diceResults[i];
+        outputWritten += ", a " + diceResults[i];
       }
-      speechText += ", and a " + diceResults[diceResults.length - 1];
-      speechText += ".  Your total is " + parseInt(diceSum, 10);
+      outputWritten += ", and a " + diceResults[diceResults.length - 1];
+      outputWritten += ".  Your total is " + parseInt(diceSum, 10);
+      outputSpeech = intro + introRoll + outputWritten;
       //console.log(diceSum);
     }
     
-    console.log("Output: " + speechText);
+    console.log("Card: " + outputWritten);
+    //console.log("Output: " + speechText);
 
     return handlerInput.responseBuilder
-      .speak(speechText)
+      .speak(outputSpeech)
       .withSimpleCard(cardTitle, outputWritten)
       /*.addDirective({
           type: 'Alexa.Presentation.APL.RenderDocument',
