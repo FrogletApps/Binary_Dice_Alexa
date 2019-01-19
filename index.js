@@ -68,12 +68,6 @@ const RollADiceHandler = {
     return handlerInput.responseBuilder
       .speak(outputSpeech)
       .withSimpleCard(cardTitle, outputWritten)
-      /*.addDirective({
-          type: 'Alexa.Presentation.APL.RenderDocument',
-          version: '1.0',
-          document: apl,
-          datasources: {}
-      })*/
       .getResponse();
   },
 };
