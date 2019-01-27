@@ -1,0 +1,57 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "binary dice",
+            "intents": [
+                {
+                    "name": "AMAZON.FallbackIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "rollADiceIntent",
+                    "slots": [
+                        {
+                            "name": "numberOfDice",
+                            "type": "AMAZON.NUMBER"
+                        }
+                    ],
+                    "samples": [
+                        "with {numberOfDice}",
+                        "{numberOfDice}",
+                        "throw {numberOfDice}",
+                        "roll {numberOfDice}",
+                        "to roll {numberOfDice} dice",
+                        "throw {numberOfDice} dice",
+                        "to throw {numberOfDice} dice",
+                        "throw a dice",
+                        "roll a die",
+                        "roll a dice",
+                        "to throw a die",
+                        "throw a die",
+                        "roll",
+                        "dice",
+                        "to roll a dice",
+                        "to roll a die"
+                    ]
+                }
+            ],
+            "types": []
+        }
+    }
+}

@@ -2,7 +2,6 @@
 /* eslint-disable  no-console */
 
 const Alexa = require('ask-sdk');
-//const apl = require('apl.json');
 
 const RollADiceHandler = {
   canHandle(handlerInput) {
