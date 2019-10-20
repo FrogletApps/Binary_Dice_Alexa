@@ -15,9 +15,10 @@ const RollADiceHandler = {
     var rolls;
     var diceSum = 0;
 
-    rolls = handlerInput.requestEnvelope.request.intent.slots.numberOfDice.value;
-    
-    if (rolls === undefined){
+    try{
+      rolls = handlerInput.requestEnvelope.request.intent.slots.numberOfDice.value;
+    }
+    catch(e){
       rolls = 1;
     }
 
